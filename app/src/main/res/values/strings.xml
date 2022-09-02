@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">The Currency Converter</string>
+    <string-array name="baseCurrencies">
+        <item>EUR - Euro</item>
+        <item>USD - US Dollar</item>
+        <item>GBP - UK Pound</item>
+    </string-array>
 </resources>
