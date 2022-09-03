@@ -8,7 +8,7 @@ em caso de não haver ligação com a net, e não podendo consultar a API, utili
 API Key:
 ocxUnvinnggVvHc14YPxzanGV5OUJCne
 
-API utilizada:
+API endpoints utilizados:
 https://api.apilayer.com/exchangerates_data
 
 symbols: {
