@@ -9,6 +9,10 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import org.json.JSONObject;
+
+import java.util.concurrent.ExecutionException;
+
 
 public class MainActivity extends AppCompatActivity {
     String baseCurrency;
@@ -71,7 +75,20 @@ public class MainActivity extends AppCompatActivity {
 
         Log.i("Conversions Button", "Clicked");
         DownloadTask downloadTask = new DownloadTask();
-        String
+        String resultString = null;
+        String urlString = "https://api.apilayer.com/exchangerates_data/latest?apikey=" + apiKey + "&base=" + baseCurrency + "&symbols=" + currency;
+        double conversionRate = 0;
+        try {
+            resultString = downloadTask.execute(urlString).get();
+            Log.i("ResultString:", resultString);
+            JSONObject resultJSON = new JSONObject(resultString);
+            conversionRate = Double.valueOf(resultJSON.getJSONObject("rates").getString(currency));
+            Log.i("COnversionRate", String.valueOf(conversionRate));
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(this, "Unable to get Rate", Toast.LENGTH_LONG).show();
+        }
+
 
 
     }
