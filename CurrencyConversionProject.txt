@@ -11,6 +11,23 @@ ocxUnvinnggVvHc14YPxzanGV5OUJCne
 API endpoints utilizados:
 https://api.apilayer.com/exchangerates_data
 
+GET query para obter um cambio:
+https://api.apilayer.com/exchangerates_data/latest?apikey=ocxUnvinnggVvHc14YPxzanGV5OUJCne&base=EUR&symbols=GBP
+
+Resposta JSON:
+
+{
+success: true,
+timestamp: 1662311943,
+base: "EUR",
+date: "2022-09-04",
+rates: {
+GBP: 0.865133
+}
+}
+
+
+
 symbols: {
 AED: "United Arab Emirates Dirham",
 AFN: "Afghan Afghani",
