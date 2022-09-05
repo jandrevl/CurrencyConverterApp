@@ -1,6 +1,8 @@
 package com.jandrevl.thecurrencyconverter;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -77,7 +79,8 @@ public class MainActivity extends AppCompatActivity {
         DownloadTask downloadTask = new DownloadTask();
         String resultString = null;
         String urlString = "https://api.apilayer.com/exchangerates_data/latest?apikey=" + apiKey + "&base=" + baseCurrency + "&symbols=" + currency;
-        double conversionRate = 0;
+        double conversionRate = 2;
+        /* Just for testing purposes
         try {
             resultString = downloadTask.execute(urlString).get();
             Log.i("ResultString:", resultString);
@@ -88,6 +91,14 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
             Toast.makeText(this, "Unable to get Rate", Toast.LENGTH_LONG).show();
         }
+
+         */
+
+        Intent intent = new Intent(getApplicationContext(), CurrencyCalculationActivity.class);
+        intent.putExtra("conversionRate", conversionRate);
+        intent.putExtra("baseCurrency", baseCurrency);
+        intent.putExtra("currency", currency);
+        startActivity(intent);
 
 
 
