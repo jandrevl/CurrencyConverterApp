@@ -9,6 +9,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class CurrencyCalculationActivity extends AppCompatActivity {
 
@@ -55,6 +56,23 @@ public class CurrencyCalculationActivity extends AppCompatActivity {
     }
 
     public void calculateConversion(View view) {
+        if(baseCurrencyEditText.getText().toString().equals("") &&
+                currencyEditText.getText().toString().equals("")) {
+            // Consider changing the following Toast to a Dialog Box
+            Toast.makeText(this,
+                    "Please insert valid amount in one of the currencies",
+                    Toast.LENGTH_SHORT).show();
+
+        }
+
+        if(!baseCurrencyEditText.getText().toString().equals("") && currencyEditText.getText().toString().equals("")) {
+            Toast.makeText(this, "base to secondary", Toast.LENGTH_SHORT).show();
+        }
+
+        if(baseCurrencyEditText.getText().toString().equals("") && !currencyEditText.getText().toString().equals("")) {
+            Toast.makeText(this, "secondary to base", Toast.LENGTH_SHORT).show();
+        }
+
 
     }
 
