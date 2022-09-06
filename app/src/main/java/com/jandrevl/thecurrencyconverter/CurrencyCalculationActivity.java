@@ -2,20 +2,27 @@ package com.jandrevl.thecurrencyconverter;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.inputmethodservice.Keyboard;
+import android.inputmethodservice.KeyboardView;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 public class CurrencyCalculationActivity extends AppCompatActivity {
 
-    double conversionRate = 0;
     EditText baseCurrencyEditText;
     EditText currencyEditText;
+    BigDecimal conversionRate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +57,7 @@ public class CurrencyCalculationActivity extends AppCompatActivity {
         baseCurrencyTextView.setText(baseCurrency);
         currencyTextView.setText(currency);
 
-        conversionRate = intent.getDoubleExtra("conversionRate", 0);
+        conversionRate = new BigDecimal(intent.getStringExtra("conversionRate"));
         Log.i("Conversion Rate received", String.valueOf(conversionRate));
 
     }
@@ -67,10 +74,23 @@ public class CurrencyCalculationActivity extends AppCompatActivity {
 
         if(!baseCurrencyEditText.getText().toString().equals("") && currencyEditText.getText().toString().equals("")) {
             Toast.makeText(this, "base to secondary", Toast.LENGTH_SHORT).show();
+            BigDecimal baseCurrencyAmount = new BigDecimal(baseCurrencyEditText.getText().toString()).setScale(2, RoundingMode.HALF_UP);
+            BigDecimal currencyAmount = baseCurrencyAmount.multiply(conversionRate).setScale(2,RoundingMode.HALF_UP);
+            currencyEditText.setText(currencyAmount.toString());
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(baseCurrencyEditText.getWindowToken(), 0);
+
+
         }
 
         if(baseCurrencyEditText.getText().toString().equals("") && !currencyEditText.getText().toString().equals("")) {
             Toast.makeText(this, "secondary to base", Toast.LENGTH_SHORT).show();
+            BigDecimal currencyAmount = new BigDecimal(currencyEditText.getText().toString()).setScale(2, RoundingMode.HALF_UP);
+            BigDecimal baseCurrencyAmount = currencyAmount.divide(conversionRate, 2, RoundingMode.HALF_UP);
+            baseCurrencyEditText.setText(baseCurrencyAmount.toString());
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(currencyEditText.getWindowToken(), 0);
+
         }
 
 

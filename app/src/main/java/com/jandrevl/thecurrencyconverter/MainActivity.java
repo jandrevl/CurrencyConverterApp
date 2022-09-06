@@ -79,14 +79,14 @@ public class MainActivity extends AppCompatActivity {
         DownloadTask downloadTask = new DownloadTask();
         String resultString = null;
         String urlString = "https://api.apilayer.com/exchangerates_data/latest?apikey=" + apiKey + "&base=" + baseCurrency + "&symbols=" + currency;
-        double conversionRate = 2;
+        String conversionRate = "1.5";
         /* Just for testing purposes
         try {
             resultString = downloadTask.execute(urlString).get();
             Log.i("ResultString:", resultString);
             JSONObject resultJSON = new JSONObject(resultString);
-            conversionRate = Double.valueOf(resultJSON.getJSONObject("rates").getString(currency));
-            Log.i("COnversionRate", String.valueOf(conversionRate));
+            conversionRate = resultJSON.getJSONObject("rates").getString(currency);
+            Log.i("conversionRate", conversionRate);
         } catch (Exception e) {
             e.printStackTrace();
             Toast.makeText(this, "Unable to get Rate", Toast.LENGTH_LONG).show();
