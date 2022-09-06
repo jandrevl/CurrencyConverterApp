@@ -79,8 +79,8 @@ public class MainActivity extends AppCompatActivity {
         DownloadTask downloadTask = new DownloadTask();
         String resultString = null;
         String urlString = "https://api.apilayer.com/exchangerates_data/latest?apikey=" + apiKey + "&base=" + baseCurrency + "&symbols=" + currency;
-        String conversionRate = "1.5";
-        /* Just for testing purposes
+        String conversionRate = "1";
+
         try {
             resultString = downloadTask.execute(urlString).get();
             Log.i("ResultString:", resultString);
@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "Unable to get Rate", Toast.LENGTH_LONG).show();
         }
 
-         */
+
 
         Intent intent = new Intent(getApplicationContext(), CurrencyCalculationActivity.class);
         intent.putExtra("conversionRate", conversionRate);
